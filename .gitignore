@@ -1,0 +1,5 @@
+__pycache__/
+.venv/
+secrets.py
+*.session
+events.csv

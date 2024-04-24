@@ -1,0 +1,1 @@
+EVENT_LOOKAHEAD_DAYS = 30 * 6 # 6 months
