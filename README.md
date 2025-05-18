@@ -1,7 +1,7 @@
 # Telegram Event Name Updater
 
 ## What does this do?
-This little tool updates your Telegram last name based on a CSV list of events that you plan on attending.
+This little tool updates your Telegram last name based on an iCal URL with events that you plan on attending.
 You can configure a cutoff, i.e. how many days events may be in the future at most to be included. The default setting is 6 months.
 
 The tool will format your last name like this:
@@ -21,5 +21,6 @@ You need to rename `secrets.example.py` to `secrets.py` and add your API ID and 
 You should set up the script to run regularly, ideally once per hour, via a cronjob.
 
 ## How do I add events?
-Rename `events.example.csv` to `events.csv` and have a look inside.
-Add one event per line, starting with the name, then the ISO 8601 timestamp (including timezone) when the event starts, and finally the timestamp when the event ends.
+The script will check all events in the specified iCal calendar for the special tag "tg-name" in the event's description.
+So if you want to include an event in your Telegram name, just add one line to the event description as follows: `tg-name: ABC`.
+This will cause the event to show up as "ABC" in your Telegram name, no matter what the event is actually called.
