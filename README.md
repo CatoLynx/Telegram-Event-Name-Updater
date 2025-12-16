@@ -21,6 +21,9 @@ You need to rename `secrets.example.py` to `secrets.py` and add your API ID and 
 You should set up the script to run regularly, ideally once per hour, via a cronjob.
 
 ## How do I add events?
-The script will check all events in the specified iCal calendar for the special tag "tg-name" in the event's description.
+The script will check all events in the specified iCal calendar for the special tags `tg-name` and `tg-name-active` in the event's description.
 So if you want to include an event in your Telegram name, just add one line to the event description as follows: `tg-name: ABC`.
-This will cause the event to show up as "ABC" in your Telegram name, no matter what the event is actually called.
+Optionally, you can also add another line like `tg-name-active: XYZ` to set a different name for the event once it starts.
+This will cause the event to show up as "ABC" in the list of upcoming events in your Telegram name and as "XYZ" once it starts, no matter what the event is actually called.
+If no `tg-name-active` tag is found, the `tg-name` tag will be used as both the upcoming and current event name.
+If a `tg-name-active` tag is found but no `tg-name` tag, the event will only show up once it's active.

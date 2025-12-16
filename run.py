@@ -31,13 +31,16 @@ from settings import EVENT_LOOKAHEAD_DAYS
 
 def get_event_short_name(event):
     if event.description is None:
-        return None
+        return (None, None)
+    pre_name = None
+    active_name = None
     desc_lines = event.description.splitlines()
     for line in desc_lines:
         if line.startswith("tg-name:"):
-            name = line.lstrip("tg-name:").strip()
-            return name
-    return None
+            pre_name = line.lstrip("tg-name:").strip()
+        if line.startswith("tg-name-active:"):
+            active_name = line.lstrip("tg-name-active:").strip()
+    return (pre_name, active_name)
 
 def generate_event_tags():
     current = []
@@ -51,9 +54,11 @@ def generate_event_tags():
         delta = event.begin - now
         # Add current event(s)
         if (event.begin <= now <= event.end):
-            name = get_event_short_name(event)
-            if name:
-                current.append(name)
+            pre_name, active_name = get_event_short_name(event)
+            if active_name:
+                current.append(active_name)
+            elif pre_name:
+                current.append(pre_name)
         # Skip events in the past
         elif (now >= event.end):
             continue
@@ -62,9 +67,9 @@ def generate_event_tags():
             continue
         # Add future event(s)
         else:
-            name = get_event_short_name(event)
-            if name:
-                future.append(name)
+            pre_name, active_name = get_event_short_name(event)
+            if pre_name:
+                future.append(pre_name)
     
     name = ""
     if current:
