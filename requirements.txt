@@ -1,6 +1,16 @@
+arrow==0.11.0
+attrs==26.1.0
+certifi==2026.2.25
+charset-normalizer==3.4.6
+ics==0.5
+idna==3.11
 pyaes==1.6.1
 Pyrogram==2.0.106
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
-six==1.16.0
+requests==2.33.1
+six==1.17.0
+TatSu==5.18.0
 TgCrypto==1.2.5
+tzdata==2025.3
+urllib3==2.6.3
